@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sakura Study Banner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #12151b;
+      --banner-purple: #e0e5ff;
+      --flower-white: #ffffff;
+      --flower-light: #c7d2fe;
+      --flower-mid: #a5b4fc;
+      --text-purple: #3730a3;
+      
+      --banner-pink: #ffe4e6;
+      --flower-pink-light: #fbcfe8;
+      --flower-pink-mid: #f472b6;
+      --text-pink: #9f1239;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .banner-container {
+      position: relative;
+      width: 380px;
+      height: 90px;
+      background-color: var(--banner-purple);
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Floating background dots */
+    .bg-dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      border-radius: 50px;
+    }
+
+    .dot {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      transition: all 0.6s ease;
+    }
+
+    .dot-1 { width: 14px; height: 14px; top: 12px; right: 80px; }
+    .dot-2 { width: 8px; height: 8px; top: 22px; right: 50px; }
+    .dot-3 { width: 22px; height: 22px; bottom: 10px; right: 40px; }
+    .dot-4 { width: 10px; height: 10px; bottom: 20px; right: 75px; }
+
+    /* Flower Group Styling */
+    .flower-group {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100px;
+      height: 100px;
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 5;
+    }
+
+    .flower {
+      position: absolute;
+      transition: all 0.6s ease;
+    }
+
+    .flower-main {
+      width: 75px;
+      height: 75px;
+      left: 5px;
+      top: 5px;
+      fill: var(--flower-white);
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    }
+
+    .flower-sec {
+      width: 55px;
+      height: 55px;
+      right: 0px;
+      bottom: 10px;
+      fill: var(--flower-light);
+    }
+
+    .flower-small {
+      width: 38px;
+      height: 38px;
+      left: 15px;
+      bottom: 0px;
+      fill: var(--flower-mid);
+    }
+
+    /* Text Styling */
+    .banner-text {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-purple);
+      letter-spacing: 0.5px;
+      transition: all 0.5s ease;
+      margin-left: 50px;
+    }
+
+    /* Active (Pink & Moved) State */
+    .banner-container.active {
+      background-color: var(--banner-pink);
+      box-shadow: 0 10px 30px rgba(244, 114, 182, 0.3);
+    }
+
+    .banner-container.active .flower-group {
+      left: calc(100% - 110px);
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .banner-container.active .flower-main {
+      fill: #ffffff;
+    }
+
+    .banner-container.active .flower-sec {
+      fill: var(--flower-pink-light);
+    }
+
+    .banner-container.active .flower-small {
+      fill: var(--flower-pink-mid);
+    }
+
+    .banner-container.active .banner-text {
+      color: var(--text-pink);
+      margin-left: 0;
+      margin-right: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="banner-container" id="sakuraBanner" onclick="toggleBanner()">
+    <div class="bg-dots">
+      <div class="dot dot-1"></div>
+      <div class="dot dot-2"></div>
+      <div class="dot dot-3"></div>
+      <div class="dot dot-4"></div>
+    </div>
+
+    <div class="flower-group">
+      <!-- Main Flower -->
+      <svg class="flower flower-main" viewBox="0 0 100 100">
+        <g>
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(72 50 50)" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(144 50 50)" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(216 50 50)" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(288 50 50)" />
+          <circle cx="50" cy="50" r="5" fill="rgba(0,0,0,0.08)"/>
+        </g>
+      </svg>
+
+      <!-- Secondary Flower -->
+      <svg class="flower flower-sec" viewBox="0 0 100 100">
+        <g>
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(72 50 50)" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(144 50 50)" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(216 50 50)" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(288 50 50)" />
+        </g>
+      </svg>
+
+      <!-- Small Flower -->
+      <svg class="flower flower-small" viewBox="0 0 100 100">
+        <g>
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(72 50 50)" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(144 50 50)" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(216 50 50)" />
+          <path d="M50 50 C40 20, 25 10, 50 2 C75 10, 60 20, 50 50 Z" transform="rotate(288 50 50)" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="banner-text" id="bannerText">study time 🌸</div>
+  </div>
+
+  <script>
+    function toggleBanner() {
+      const banner = document.getElementById('sakuraBanner');
+      const text = document.getElementById('bannerText');
+
+      banner.classList.toggle('active');
+
+      if (banner.classList.contains('active')) {
+        text.textContent = 'progress time ✨';
+      } else {
+        text.textContent = 'study time 🌸';
+      }
+    }
+  </script>
+
+</body>
+</html>
